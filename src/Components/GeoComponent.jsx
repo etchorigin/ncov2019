@@ -76,7 +76,7 @@ const GeoComponent = () => {
         )}
       </Card>
       <Card className="Statistics-Card">
-        {mapData.length === 0 ? (
+        {mapData.length === 0 || tableData.length === 0 ? (
           <Spinner intent={Intent.PRIMARY} size={Spinner.SIZE_STANDARD} />
         ) : (
           <Map center={mapCenter} zoom={4}>
