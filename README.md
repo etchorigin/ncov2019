@@ -1,3 +1,6 @@
+Application is based on the Wuhan Coronavirus Global Cases GIS board developed by JHU CSSE
+I thought that the UI was not responsive enough to fit into Mobile space, hence i decided to create this front-end project.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

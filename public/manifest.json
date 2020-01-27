@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "2019-nCoV",
+  "name": "Novel Coronavirus (2019-nCoV) Cases - Data tracked by JHU CSSE",
   "icons": [
     {
       "src": "favicon.ico",
