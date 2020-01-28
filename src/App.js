@@ -11,7 +11,7 @@ import Footer from "./Components/Footer";
 
 const App = () => {
   // States
-  const [status, setStatus] = useState("Retrieving nCoV status...");
+  const [updated, setUpdated] = useState("");
   const [sgData, setSGData] = useState({});
   const [totalCases, setTotalCases] = useState(null);
   const [totalDeaths, setTotalDeaths] = useState(null);
@@ -21,11 +21,10 @@ const App = () => {
   const [statsData, setStatsData] = useState([]);
 
   useEffect(() => {
-    Api.fetchStatusData(setStatus);
     Api.fetchResultCases(setTotalCases);
     Api.fetchResultDeaths(setTotalDeaths);
     Api.fetchResultRecovered(setTotalRecovered);
-    Api.fetchTableData(setTableData, setSGData);
+    Api.fetchTableData(setTableData, setSGData, setUpdated);
     Api.fetchMapData(setMapData);
     Api.fetchStatsData(setStatsData);
   }, []);
@@ -33,7 +32,7 @@ const App = () => {
   document.body.className = "bp3-dark";
   return (
     <div className="App">
-      <TitleHead data={status} />
+      <TitleHead data={updated} />
       <SingaporeStats data={sgData} />
       <InternationalStats
         totalCases={totalCases}
