@@ -1,39 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Map from "pigeon-maps";
 import Overlay from "pigeon-overlay";
-import axios from "axios";
 import { Card, H6, HTMLTable, Spinner, Intent } from "@blueprintjs/core";
 import "../App.css";
 
 import AppToaster from "./AppToaster";
 
-const GeoComponent = () => {
+const GeoComponent = props => {
   const [mapCenter, setMapCenter] = useState([1.3521, 103.8198]);
-  const [tableData, setTableData] = useState([]);
-  const [mapData, setMapData] = useState([]);
-  const [maxCases, setMaxCases] = useState(100);
-
-  useEffect(() => {
-    const fetchTableData = async () => {
-      const resultTable = await axios(
-        "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/ncov_cases/FeatureServer/2/query?f=json&where=1%3D1&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=Confirmed%20desc&resultOffset=0&resultRecordCount=100&cacheHint=true"
-      );
-      setTableData(resultTable.data.features);
-    };
-    const fetchMapData = async () => {
-      const resultMap = await axios(
-        "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/ncov_cases/FeatureServer/1/query?f=json&where=1%3D1&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=Confirmed%20desc&resultOffset=0&resultRecordCount=1000&cacheHint=true"
-      );
-      setMapData(resultMap.data.features);
-      setMaxCases(resultMap.data.features[0].attributes.Confirmed);
-    };
-
-    fetchTableData();
-    fetchMapData();
-  }, []);
 
   const calculateRing = cases => {
-    const ringPercent = (cases / maxCases) * 100;
+    const ringPercent = (cases / props.mapData[0].attributes.Confirmed) * 100;
     if (ringPercent < 20.0) {
       return 20;
     } else if (ringPercent < 40.0) {
@@ -47,7 +24,7 @@ const GeoComponent = () => {
   return (
     <div className="Geo-Container">
       <Card className="Statistics-Card-Space">
-        {tableData.length === 0 ? (
+        {props.tableData.length === 0 ? (
           <Spinner intent={Intent.PRIMARY} size={Spinner.SIZE_STANDARD} />
         ) : (
           <HTMLTable condensed interactive>
@@ -58,34 +35,39 @@ const GeoComponent = () => {
               </tr>
             </thead>
             <tbody>
-              {tableData.map(country => (
-                <tr
-                  onClick={() =>
-                    setMapCenter([
-                      country.attributes.Lat,
-                      country.attributes.Long_
-                    ])
-                  }
-                >
-                  <td>{country.attributes.Country_Region}</td>
-                  <td>{country.attributes.Confirmed}</td>
-                </tr>
-              ))}
+              {props.tableData.map(
+                country =>
+                  country.attributes.Country_Region && (
+                    <tr
+                      key={country.attributes.Country_Region}
+                      onClick={() =>
+                        setMapCenter([
+                          country.attributes.Lat,
+                          country.attributes.Long_
+                        ])
+                      }
+                    >
+                      <td>{country.attributes.Country_Region}</td>
+                      <td>{country.attributes.Confirmed.toLocaleString()}</td>
+                    </tr>
+                  )
+              )}
             </tbody>
           </HTMLTable>
         )}
       </Card>
       <Card className="Statistics-Card">
-        {mapData.length === 0 || tableData.length === 0 ? (
+        {props.mapData.length === 0 || props.tableData.length === 0 ? (
           <Spinner intent={Intent.PRIMARY} size={Spinner.SIZE_STANDARD} />
         ) : (
           <Map center={mapCenter} zoom={4}>
-            {mapData.map(country => {
+            {props.mapData.map(country => {
               const ring = calculateRing(country.attributes.Confirmed);
               const ringHalf = Math.round(ring / 2);
 
               return (
                 <Overlay
+                  key={`${country.attributes.Country_Region},${country.attributes.Province_State}`}
                   anchor={[country.attributes.Lat, country.attributes.Long_]}
                   offset={[ringHalf, ringHalf]}
                 >
@@ -107,7 +89,7 @@ const GeoComponent = () => {
                               <span>Confirmed Case:</span>
                               <span>
                                 {country.attributes.Confirmed
-                                  ? country.attributes.Confirmed
+                                  ? country.attributes.Confirmed.toLocaleString()
                                   : 0}
                               </span>
                             </div>
@@ -115,7 +97,7 @@ const GeoComponent = () => {
                               <span>Deaths:</span>
                               <span>
                                 {country.attributes.Deaths
-                                  ? country.attributes.Deaths
+                                  ? country.attributes.Deaths.toLocaleString()
                                   : 0}
                               </span>
                             </div>
@@ -123,7 +105,7 @@ const GeoComponent = () => {
                               <span>Recovered:</span>
                               <span>
                                 {country.attributes.Recovered
-                                  ? country.attributes.Recovered
+                                  ? country.attributes.Recovered.toLocaleString()
                                   : 0}
                               </span>
                             </div>

@@ -16,7 +16,7 @@
 }
 
 .Statistics-Card {
-  flex-grow: 1;
+  flex: 1 1 0px;
 }
 
 .Statistics-Card-Space {
@@ -37,6 +37,15 @@
 .Toaster-Row-Container {
   display: flex;
   justify-content: space-between;
+}
+
+.Trends-Container {
+  margin-top: 16px;
+  height: 300px;
+}
+
+.Trends-Card {
+  height: 100%;
 }
 
 .Footer-Container {
