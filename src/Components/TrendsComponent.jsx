@@ -52,7 +52,10 @@ const TrendsComponent = props => {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="Report_Date" tick={<CustomizedAxisTick />} />
             <YAxis tick={{ fill: "#a7b6c2" }} />
-            <Tooltip />
+            <Tooltip
+              contentStyle={{ backgroundColor: "black" }}
+              labelFormatter={name => moment(name).format("MMM DD")}
+            />
             <Legend onClick={handleClick} />
             <Line
               type="monotone"
