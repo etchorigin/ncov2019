@@ -32,7 +32,7 @@ export const fetchTableData = async (setter1, setter2, setter3) => {
   setter2(sgResult);
   setter3(
     moment
-      .utc(sgResult.attributes.Last_Update)
+      .utc(result.data.features[0].attributes.Last_Update)
       .add(13, "hours")
       .format(`MMM DD, YYYY. hh:mm a dddd`)
   );
