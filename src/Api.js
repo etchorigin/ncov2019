@@ -25,7 +25,7 @@ export const fetchTableData = async (setter1, setter2, setter3) => {
   );
 
   const sgResult = result.data.features.find(
-    country => country.attributes.Country_Region === "Singapore "
+    country => country.attributes.Country_Region === "Singapore"
   );
 
   setter1(result.data.features);
