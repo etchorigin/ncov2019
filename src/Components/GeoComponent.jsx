@@ -31,8 +31,8 @@ const GeoComponent = props => {
             <thead>
               <tr>
                 <th>Country</th>
-                <th>Cases</th>
                 <th>Deaths</th>
+                <th>Cases</th>
                 <th>Recovered</th>
               </tr>
             </thead>
@@ -54,8 +54,8 @@ const GeoComponent = props => {
                           ? "Diamond Princess"
                           : country.attributes.Country_Region}
                       </td>
-                      <td>{country.attributes.Confirmed.toLocaleString()}</td>
                       <td>{country.attributes.Deaths.toLocaleString()}</td>
+                      <td>{country.attributes.Confirmed.toLocaleString()}</td>
                       <td>{country.attributes.Recovered.toLocaleString()}</td>
                     </tr>
                   )

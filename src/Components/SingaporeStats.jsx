@@ -15,7 +15,7 @@ const SingaporeStats = props => (
     </div>
 
     <div className="Statistics-Container">
-      <Card className="Statistics-Card">
+      <Card className="Statistics-Card Statistics-Card-Space">
         <H6 className="bp3-text-muted">Deaths</H6>
         {"attributes" in props.data ? (
           <H1>
@@ -41,7 +41,7 @@ const SingaporeStats = props => (
         )}
       </Card>
 
-      <Card className="Statistics-Card Statistics-Card-Space">
+      <Card className="Statistics-Card">
         <H6 className="bp3-text-muted">Recoveries</H6>
         {"attributes" in props.data ? (
           <H1>
