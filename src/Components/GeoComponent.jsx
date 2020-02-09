@@ -47,7 +47,11 @@ const GeoComponent = props => {
                         ])
                       }
                     >
-                      <td>{country.attributes.Country_Region}</td>
+                      <td>
+                        {country.attributes.Country_Region === "Others"
+                          ? "Diamond Princess"
+                          : country.attributes.Country_Region}
+                      </td>
                       <td>{country.attributes.Confirmed.toLocaleString()}</td>
                     </tr>
                   )
