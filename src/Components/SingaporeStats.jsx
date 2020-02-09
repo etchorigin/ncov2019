@@ -15,6 +15,19 @@ const SingaporeStats = props => (
     </div>
 
     <div className="Statistics-Container">
+      <Card className="Statistics-Card">
+        <H6 className="bp3-text-muted">Deaths</H6>
+        {"attributes" in props.data ? (
+          <H1>
+            {props.data.attributes.Deaths
+              ? props.data.attributes.Deaths.toLocaleString()
+              : 0}
+          </H1>
+        ) : (
+          <Spinner intent={Intent.PRIMARY} size={Spinner.SIZE_STANDARD} />
+        )}
+      </Card>
+
       <Card className="Statistics-Card Statistics-Card-Space">
         <H6 className="bp3-text-muted">Confirmed Cases</H6>
         {"attributes" in props.data ? (
@@ -34,18 +47,6 @@ const SingaporeStats = props => (
           <H1>
             {props.data.attributes.Recovered
               ? props.data.attributes.Recovered.toLocaleString()
-              : 0}
-          </H1>
-        ) : (
-          <Spinner intent={Intent.PRIMARY} size={Spinner.SIZE_STANDARD} />
-        )}
-      </Card>
-      <Card className="Statistics-Card">
-        <H6 className="bp3-text-muted">Deaths</H6>
-        {"attributes" in props.data ? (
-          <H1>
-            {props.data.attributes.Deaths
-              ? props.data.attributes.Deaths.toLocaleString()
               : 0}
           </H1>
         ) : (
