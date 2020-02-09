@@ -32,6 +32,8 @@ const GeoComponent = props => {
               <tr>
                 <th>Country</th>
                 <th>Cases</th>
+                <th>Deaths</th>
+                <th>Recovered</th>
               </tr>
             </thead>
             <tbody>
@@ -53,6 +55,8 @@ const GeoComponent = props => {
                           : country.attributes.Country_Region}
                       </td>
                       <td>{country.attributes.Confirmed.toLocaleString()}</td>
+                      <td>{country.attributes.Deaths.toLocaleString()}</td>
+                      <td>{country.attributes.Recovered.toLocaleString()}</td>
                     </tr>
                   )
               )}
