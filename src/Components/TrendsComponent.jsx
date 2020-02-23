@@ -29,7 +29,8 @@ const TrendsComponent = props => {
   const [opacity, setOpacity] = useState({
     Mainland_China: true,
     Other_Locations: true,
-    Total_Confirmed: false
+    Total_Confirmed: true,
+    Total_Recovered: true,
   });
 
   const handleClick = o => {
@@ -40,7 +41,7 @@ const TrendsComponent = props => {
   return (
     <div className="Trends-Container ">
       <Card className="Trends-Card Statistics-Card">
-        <H6 className="bp3-text-muted">Trend of Confirmed Cases</H6>
+        <H6 className="bp3-text-muted">Trend of Cases</H6>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={props.data}
@@ -77,6 +78,13 @@ const TrendsComponent = props => {
               name="Total Confirmed"
               strokeOpacity={opacity.Total_Confirmed ? 1 : 0}
               stroke="#ffaa00"
+            />
+            <Line
+              type="monotone"
+              dataKey="Total_Recovered"
+              name="Total Recovered"
+              strokeOpacity={opacity.Total_Recovered ? 1 : 0}
+              stroke="#00ff00"
             />
           </LineChart>
         </ResponsiveContainer>
