@@ -27,7 +27,11 @@ const GeoComponent = props => {
         {props.tableData.length === 0 ? (
           <Spinner intent={Intent.PRIMARY} size={Spinner.SIZE_STANDARD} />
         ) : (
-          <HTMLTable condensed interactive>
+          <HTMLTable
+            condensed
+            interactive
+            style={{ display: "block", height: "320px", overflowY: "auto" }}
+          >
             <thead>
               <tr>
                 <th>Country</th>
