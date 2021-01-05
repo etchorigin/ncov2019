@@ -9,7 +9,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "moment": "^2.24.0",
     "pigeon-maps": "^0.14.0",
     "pigeon-marker": "^0.3.4",
